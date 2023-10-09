@@ -36,7 +36,7 @@ const corsOpts = {
     }
   
     try {
-      const response = await axios.get(`https://myforwap.site/confirm/${req.params.number}/${req.params.name}`);
+      const response = await axios.get(`${process.env.NODE_BASE_DOWNLOAD_URL}confirm/${req.params.number}/${req.params.name}`);
       const $ = cheerio.load(response?.data);
   
       const downloadLink = $("div.list a[onclick]").attr("href");
@@ -165,7 +165,7 @@ const corsOpts = {
       }
     
       try {
-        const response = await axios.get(`https://flymywap.site/download/${req.params.number}/${req.params.name}`);
+        const response = await axios.get(`${process.env.NODE_BASE_URL}download/${req.params.number}/${req.params.name}`);
         const $ = cheerio.load(response.data);
     
         const imgSrc = $("div.thumbnail img").attr("src");
@@ -209,7 +209,7 @@ const corsOpts = {
       }
     
       try {
-        const response = await axios.get(`https://linkmake.in/view/${req.params.name}`);
+        const response = await axios.get(`${process.env.NODE_BASE_LINK_URL}view/${req.params.name}`);
         const $ = cheerio.load(response.data);
     
         // Extract the movie title
@@ -273,7 +273,7 @@ const corsOpts = {
     app.get("/SearchMovie/:name", async (req, res) => {
       console.log(req?.params?.name)
       try {
-        const response = await axios.get(`https://flymywap.site/page-category.html?to-title=${req?.params?.name?.replace(/ +/g, "+")}`);
+        const response = await axios.get(`${process.env.NODE_BASE_URL}page-category.html?to-title=${req?.params?.name?.replace(/ +/g, "+")}`);
         const $ = cheerio.load(response?.data);
         const movies = [];
   
@@ -330,7 +330,7 @@ app.get("/Latest_Movie", async (req, res) => {
       return res.json({ movies: cachedData });
     }
 
-    const response = await axios.get("https://flymywap.site/index.html");
+    const response = await axios.get(`${process.env.NODE_BASE_URL}index.html`);
     const $ = cheerio.load(response.data);
     const movies = [];
 
